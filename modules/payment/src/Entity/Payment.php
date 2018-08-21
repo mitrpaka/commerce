@@ -279,6 +279,19 @@ class Payment extends ContentEntityBase implements PaymentInterface {
   /**
    * {@inheritdoc}
    */
+  public function postCreate(EntityStorageInterface $storage) {
+    parent::postCreate($storage);
+
+    // Set the refunded amount to 0 if not set.
+    if ($this->get('refunded_amount')->isEmpty()) {
+      $refunded_amount = new Price('0', $this->getAmount()->getCurrencyCode());
+      $this->setRefundedAmount($refunded_amount);
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function preSave(EntityStorageInterface $storage) {
     parent::preSave($storage);
 
