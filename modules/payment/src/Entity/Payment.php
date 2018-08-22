@@ -282,8 +282,8 @@ class Payment extends ContentEntityBase implements PaymentInterface {
   public function postCreate(EntityStorageInterface $storage) {
     parent::postCreate($storage);
 
-    // Set the refunded amount to 0, if not set.
-    if ($this->get('refunded_amount')->isEmpty()) {
+    // Initialize the refunded amount if not set, but the payment amount exists.
+    if ($this->get('refunded_amount')->isEmpty() && !$this->get('amount')->isEmpty()) {
       $refunded_amount = new Price('0', $this->getAmount()->getCurrencyCode());
       $this->setRefundedAmount($refunded_amount);
     }
