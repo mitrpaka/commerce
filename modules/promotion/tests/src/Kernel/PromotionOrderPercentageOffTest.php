@@ -41,7 +41,6 @@ class PromotionOrderPercentageOffTest extends CommerceKernelTestBase {
     'state_machine',
     'commerce_order',
     'path',
-    'commerce_product',
     'commerce_promotion',
   ];
 
@@ -55,12 +54,9 @@ class PromotionOrderPercentageOffTest extends CommerceKernelTestBase {
     $this->installEntitySchema('commerce_order');
     $this->installEntitySchema('commerce_order_item');
     $this->installEntitySchema('commerce_promotion');
-    $this->installEntitySchema('commerce_product_variation');
-    $this->installEntitySchema('commerce_product');
     $this->installConfig([
       'profile',
       'commerce_order',
-      'commerce_product',
       'commerce_promotion',
     ]);
     $this->installSchema('commerce_promotion', ['commerce_promotion_usage']);
